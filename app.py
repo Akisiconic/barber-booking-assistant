@@ -1,0 +1,1 @@
+# app.py - everything the user sees (screens, buttons, the chat box)

@@ -1,0 +1,1 @@
+# ai_assistant.py - talks to the LLM to understand what the client wants
