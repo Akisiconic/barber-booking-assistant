@@ -1,4 +1,5 @@
 # bookings.py - handles booking, rescheduling and cancelling appointments
+booked_slots = [9, 10, 11, 12, 13, 14, 15, 16, 17]
 hour = 10
 open_time = 9
 close_time = 18
@@ -12,9 +13,13 @@ elif hour >= close_time:
 elif hour == lunch_time:
     print("Barber is on lunch, back at 1")
 elif hour >= open_time:
-    for time_slot in range(9, 18):
-     print(f"{time_slot}:00 is Available")
     print("shop is open")
+    for time_slot in range(9, 18):
+        if time_slot not in booked_slots:
+            print(f"Next Available: {time_slot}:00") 
+            break 
+    else:
+        print("No Slots available Today") 
 else:
     print("We are still closed right now !")
 
