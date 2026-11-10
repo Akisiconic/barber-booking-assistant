@@ -6,6 +6,18 @@ close_time = 18
 lunch_time = 12
 day = "monday"
 
+def find_next_slot(booked_slots):
+    for time_slot in range(9, 18):
+        if time_slot == lunch_time:
+            continue
+        if time_slot in booked_slots:
+            continue
+        return time_slot
+    else:
+        return None
+booked_slots = [9,10,11,13,14,15,16,17]
+print(find_next_slot(booked_slots))
+
 if day.lower() == "sunday":
     print("We are closed today ")
 elif hour >= close_time:
