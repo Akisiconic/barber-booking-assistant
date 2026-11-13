@@ -1,4 +1,16 @@
-from bookings import find_next_slot, is_closed_day, shop_status
+from bookings import book_slot, find_next_slot, is_closed_day, shop_status
+
+
+def test_book_slot_adds_free_hour():
+    booked = [9, 10]
+    assert book_slot(booked, 14) is True
+    assert booked == [9, 10, 14]
+
+
+def test_book_slot_refuses_taken_hour():
+    booked = [9, 10]
+    assert book_slot(booked, 10) is False
+    assert booked == [9, 10]
 
 
 def test_first_slot_when_nothing_booked():
