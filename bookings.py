@@ -52,6 +52,17 @@ def book_slot(booked_slots, hour):
     return True
 
 
+def cancel_booking(booked_slots, hour):
+    """Cancel the booking at `hour` by removing it from `booked_slots`.
+
+    Returns True if it was cancelled, or False if there was no booking at that hour.
+    """
+    if hour not in booked_slots:
+        return False
+    booked_slots.remove(hour)
+    return True
+
+
 if __name__ == "__main__":
     booked = [9, 10, 11]
     day = "monday"
