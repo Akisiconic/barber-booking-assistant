@@ -68,6 +68,8 @@ if __name__ == "__main__":
         else:
             print(f"Sorry, that's taken. The next free time is {next_slot}:00")
     else:
-        book_slot(booked, hour)
-        print(f"You're booked in for {hour}:00!")
-        print(f"Booked today: {booked}")
+        if book_slot(booked, hour):
+            print(f"You're booked in for {hour}:00!")
+            print(f"Booked today: {booked}")
+        else:
+            print("Sorry, someone just took that slot.")
