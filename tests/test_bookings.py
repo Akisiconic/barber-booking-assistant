@@ -3,8 +3,27 @@ from bookings import (
     cancel_booking,
     find_next_slot,
     is_closed_day,
+    reschedule_booking,
     shop_status,
 )
+
+
+def test_reschedule_moves_booking():
+    booked = [9, 10]
+    assert reschedule_booking(booked, 10, 14) is True
+    assert booked == [9, 14]
+
+
+def test_reschedule_to_taken_hour_keeps_old_booking():
+    booked = [9, 10]
+    assert reschedule_booking(booked, 10, 9) is False
+    assert booked == [9, 10]
+
+
+def test_reschedule_with_no_booking_returns_false():
+    booked = [9]
+    assert reschedule_booking(booked, 15, 16) is False
+    assert booked == [9]
 
 
 def test_cancel_booking_removes_hour():
