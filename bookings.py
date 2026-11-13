@@ -80,20 +80,59 @@ if __name__ == "__main__":
     booked = [9, 10, 11]
     day = "monday"
 
-    hour = int(input("What hour do you want to come in? (9-17): "))
+    while True:
+        print()
+        print("1 = Book")
+        print("2 = Cancel")
+        print("3 = Reschedule")
+        print("4 = View bookings")
+        print("5 = Quit")
+        choice = input("Choose an option: ")
 
-    status = shop_status(day, hour)
-    if status != "Shop is open":
-        print(status)
-    elif hour in booked:
-        next_slot = find_next_slot(booked, hour)
-        if next_slot is None:
-            print("Sorry, that's taken and there are no times left today.")
+        if choice == "1":
+            hour = int(input("What hour do you want to come in? (9-17): "))
+            status = shop_status(day, hour)
+            if status != "Shop is open":
+                print(status)
+            elif hour in booked:
+                next_slot = find_next_slot(booked, hour)
+                if next_slot is None:
+                    print("Sorry, that's taken and there are no times left today.")
+                else:
+                    print(f"Sorry, that's taken. The next free time is {next_slot}:00")
+            elif book_slot(booked, hour):
+                print(f"You're booked in for {hour}:00!")
+            else:
+                print("Sorry, someone just took that slot.")
+
+        elif choice == "2":
+            hour = int(input("Which hour do you want to cancel? "))
+            if cancel_booking(booked, hour):
+                print(f"Your {hour}:00 booking is cancelled.")
+            else:
+                print(f"There's no booking at {hour}:00.")
+
+        elif choice == "3":
+            old_hour = int(input("Which hour is your booking now? "))
+            new_hour = int(input("What hour do you want to move to? (9-17): "))
+            status = shop_status(day, new_hour)
+            if status != "Shop is open":
+                print(status)
+            elif reschedule_booking(booked, old_hour, new_hour):
+                print(f"Moved your booking from {old_hour}:00 to {new_hour}:00.")
+            else:
+                print("Couldn't move it. Check you have a booking at that hour and the new time is free.")
+
+        elif choice == "4":
+            if booked:
+                for hour in sorted(booked):
+                    print(f"- {hour}:00")
+            else:
+                print("No bookings yet.")
+
+        elif choice == "5":
+            print("Bye!")
+            break
+
         else:
-            print(f"Sorry, that's taken. The next free time is {next_slot}:00")
-    else:
-        if book_slot(booked, hour):
-            print(f"You're booked in for {hour}:00!")
-            print(f"Booked today: {booked}")
-        else:
-            print("Sorry, someone just took that slot.")
+            print("Please choose a number from 1 to 5.")
