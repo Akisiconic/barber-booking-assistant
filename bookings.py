@@ -41,8 +41,19 @@ def shop_status(day, hour):
     return "We are still closed right now!"
 
 
+def book_slot(booked_slots, hour):
+    """Book `hour` by adding it to `booked_slots`.
+
+    Returns True if it was booked, or False if that hour was already taken.
+    """
+    if hour in booked_slots:
+        return False
+    booked_slots.append(hour)
+    return True
+
+
 if __name__ == "__main__":
-    booked = [9, 10, 11, 13]
+    booked = [9, 10, 11]
     day = "monday"
 
     hour = int(input("What hour do you want to come in? (9-17): "))
@@ -57,4 +68,6 @@ if __name__ == "__main__":
         else:
             print(f"Sorry, that's taken. The next free time is {next_slot}:00")
     else:
-        print(f"{hour}:00 is available!")
+        book_slot(booked, hour)
+        print(f"You're booked in for {hour}:00!")
+        print(f"Booked today: {booked}")
