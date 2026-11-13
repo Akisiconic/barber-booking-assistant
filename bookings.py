@@ -76,6 +76,15 @@ def reschedule_booking(booked_slots, old_hour, new_hour):
     return True
 
 
+def ask_hour(question):
+    """Keep asking `question` until the user types a whole number, then return it."""
+    while True:
+        try:
+            return int(input(question))
+        except ValueError:
+            print("Please type the hour as a number, like 14.")
+
+
 if __name__ == "__main__":
     booked = [9, 10, 11]
     day = "monday"
@@ -90,7 +99,7 @@ if __name__ == "__main__":
         choice = input("Choose an option: ")
 
         if choice == "1":
-            hour = int(input("What hour do you want to come in? (9-17): "))
+            hour = ask_hour("What hour do you want to come in? (9-17): ")
             status = shop_status(day, hour)
             if status != "Shop is open":
                 print(status)
@@ -106,15 +115,15 @@ if __name__ == "__main__":
                 print("Sorry, someone just took that slot.")
 
         elif choice == "2":
-            hour = int(input("Which hour do you want to cancel? "))
+            hour = ask_hour("Which hour do you want to cancel? ")
             if cancel_booking(booked, hour):
                 print(f"Your {hour}:00 booking is cancelled.")
             else:
                 print(f"There's no booking at {hour}:00.")
 
         elif choice == "3":
-            old_hour = int(input("Which hour is your booking now? "))
-            new_hour = int(input("What hour do you want to move to? (9-17): "))
+            old_hour = ask_hour("Which hour is your booking now? ")
+            new_hour = ask_hour("What hour do you want to move to? (9-17): ")
             status = shop_status(day, new_hour)
             if status != "Shop is open":
                 print(status)
