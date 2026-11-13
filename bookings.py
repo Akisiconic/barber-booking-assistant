@@ -51,6 +51,10 @@ if __name__ == "__main__":
     if status != "Shop is open":
         print(status)
     elif hour in booked:
-        print("Sorry, that slot is already taken.")
+        next_slot = find_next_slot(booked, hour)
+        if next_slot is None:
+            print("Sorry, that's taken and there are no times left today.")
+        else:
+            print(f"Sorry, that's taken. The next free time is {next_slot}:00")
     else:
         print(f"{hour}:00 is available!")
