@@ -63,6 +63,19 @@ def cancel_booking(booked_slots, hour):
     return True
 
 
+def reschedule_booking(booked_slots, old_hour, new_hour):
+    """Move a booking from `old_hour` to `new_hour`.
+
+    Returns True if it moved, or False if there was no booking at `old_hour`
+    or `new_hour` is already taken. Nothing changes when it returns False.
+    """
+    if old_hour not in booked_slots or new_hour in booked_slots:
+        return False
+    cancel_booking(booked_slots, old_hour)
+    book_slot(booked_slots, new_hour)
+    return True
+
+
 if __name__ == "__main__":
     booked = [9, 10, 11]
     day = "monday"
