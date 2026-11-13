@@ -47,8 +47,9 @@ if __name__ == "__main__":
 
     hour = int(input("What hour do you want to come in? (9-17): "))
 
-    if shop_status(day, hour) != "Shop is open":
-        print(shop_status(day, hour))
+    status = shop_status(day, hour)
+    if status != "Shop is open":
+        print(status)
     elif hour in booked:
         print("Sorry, that slot is already taken.")
     else:
