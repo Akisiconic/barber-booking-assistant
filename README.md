@@ -1,25 +1,47 @@
-# Barber Booking Assistant
+# Barber Booking App
 
-## The problem
-I cut hair, and managing my clients is a constant headache: booking over text, last-minute reschedules, cancellations, and no-shows that waste slots another client could have taken. I'm building this to handle all of that through a simple chat.
+A terminal-based booking system for a barbershop, built in Python.
+Customers can book, cancel, and reschedule hourly appointments,
+and bookings are saved between sessions.
 
-## V1 features
-**Barber:**
-- Set services and prices
-- Set working hours
-- See today's bookings
-- Mark a client as "not here"
+## Features
+- Book an available time slot (checks shop hours, closed days, and lunch break)
+- Suggests the next free slot if the chosen time is taken
+- Cancel and reschedule bookings
+- Input validation (handles non-numeric and out-of-hours input)
+- Bookings saved to a JSON file so they persist after closing
 
-**Client (by chat):**
-- Book an open slot in plain language ("can I come in at 3 tomorrow?")
-- Let the barber know they're running late
-- Reschedule
-- Cancel
+## How to Run
+1. Make sure Python 3 is installed
+2. Clone the repo and go into the folder:
+   ```
+   git clone https://github.com/Akisiconic/barber-booking-assistant.git
+   cd barber-booking-assistant
+   ```
+3. Run:
+   ```
+   python3 bookings.py
+   ```
 
-**No-show handling:** when the barber marks a client as not here, the AI messages them asking for an ETA. If there's no reply in 10 minutes, it asks the barber whether to cancel. The slot is only freed after the barber confirms.
+## Running the Tests
+```
+pip install pytest
+python3 -m pytest
+```
 
-## Tech
-Python, SQLite, Streamlit, LLM API
+## Project Structure
+- `bookings.py` – booking logic and menu
+- `database.py` – saves and loads bookings (JSON)
+- `tests/` – automated tests for the booking rules and saving/loading
+- `app.py` – (planned) Flask web booking page
+- `ai_assistant.py` – (planned) AI booking assistant
 
-## Status
-In progress
+## What I Learned
+- Writing reusable functions with return values
+- Input validation with try/except
+- Persisting data with JSON file handling
+
+## Roadmap
+- [ ] Move storage from JSON to SQLite
+- [ ] Flask web pages for customers and a barber view
+- [ ] AI assistant for booking through chat
