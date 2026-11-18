@@ -221,3 +221,6 @@ __marimo__/
 
 # Local app database
 *.db
+
+# Local bookings data
+bookings.json
