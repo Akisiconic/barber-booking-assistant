@@ -3,6 +3,8 @@
 # These are the shop rules. Right now they're plain values; in the next step
 # they move into the database so the barber can change them from the app.
 
+from database import load_bookings, save_bookings
+
 OPEN_TIME = 9      # first slot starts at 9:00
 CLOSE_TIME = 18    # shop closes at 18:00, so the last slot is 17:00
 LUNCH_TIME = 12    # no bookings 12:00-13:00
@@ -86,7 +88,7 @@ def ask_hour(question):
 
 
 if __name__ == "__main__":
-    booked = [9, 10, 11]
+    booked = load_bookings()
     day = "monday"
 
     while True:
