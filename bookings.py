@@ -112,6 +112,7 @@ if __name__ == "__main__":
                 else:
                     print(f"Sorry, that's taken. The next free time is {next_slot}:00")
             elif book_slot(booked, hour):
+                save_bookings(booked)
                 print(f"You're booked in for {hour}:00!")
             else:
                 print("Sorry, someone just took that slot.")
@@ -119,6 +120,7 @@ if __name__ == "__main__":
         elif choice == "2":
             hour = ask_hour("Which hour do you want to cancel? ")
             if cancel_booking(booked, hour):
+                save_bookings(booked)
                 print(f"Your {hour}:00 booking is cancelled.")
             else:
                 print(f"There's no booking at {hour}:00.")
@@ -130,6 +132,7 @@ if __name__ == "__main__":
             if status != "Shop is open":
                 print(status)
             elif reschedule_booking(booked, old_hour, new_hour):
+                save_bookings(booked)
                 print(f"Moved your booking from {old_hour}:00 to {new_hour}:00.")
             else:
                 print("Couldn't move it. Check you have a booking at that hour and the new time is free.")
